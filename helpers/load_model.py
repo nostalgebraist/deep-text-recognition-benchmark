@@ -1,19 +1,7 @@
-import os
-import time
-import string
-import argparse
-import re
-import validators
-
 import torch
-import torch.backends.cudnn as cudnn
 import torch.utils.data
-import torch.nn.functional as F
-import numpy as np
-from nltk.metrics.distance import edit_distance
 
-from utils import CTCLabelConverter, AttnLabelConverter, Averager, TokenLabelConverter
-from dataset import hierarchical_dataset, AlignCollate
+from utils import TokenLabelConverter
 from model import Model
 from helpers.args_hack import get_args
 
@@ -34,3 +22,5 @@ def load_model(device=None, **kwargs):
 
     model.load_state_dict(sd2)
     model.to(device)
+
+    return model
