@@ -23,4 +23,4 @@ def load_model(device=None, **kwargs):
     model.load_state_dict(sd2)
     model.to(device)
 
-    return model
+    return model, converter, device
