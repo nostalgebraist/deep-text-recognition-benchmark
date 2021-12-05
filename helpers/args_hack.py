@@ -1,3 +1,6 @@
+import argparse
+import string
+
 DEFAULTS = dict(
     Transformer=True,
     sensitive=True,
@@ -23,7 +26,7 @@ def get_args(is_train=False, **kwargs):
     parser.add_argument('--train_data', required=is_train, help='path to training dataset')
     parser.add_argument('--valid_data', required=is_train, help='path to validation dataset')
     parser.add_argument('--manualSeed', type=int, default=1111, help='for random seed setting')
-    parser.add_argument('--workers', type=int, help='number of data loading workers. Use -1 to use all cores.', default=4)
+    parser.add_argument('--workers', type=int, help='number of data loading workers. Use -1 to use all cores.', default=1)
     parser.add_argument('--batch_size', type=int, default=192, help='input batch size')
     parser.add_argument('--num_iter', type=int, default=300000, help='number of iterations to train for')
     parser.add_argument('--valInterval', type=int, default=2000, help='Interval between each validation')
@@ -117,5 +120,8 @@ def get_args(is_train=False, **kwargs):
         args.character = string.printable[:-6]  # same with ASTER setting (use 94 char).
 
     args.num_class = len(args.character) + 2
+
+    # others that seemed necessary (?)
+    args.eval = True
 
     return args
